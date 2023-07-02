@@ -1,0 +1,27 @@
+@startuml
+
+!define TABLE_BORDER_COLOR #AAAAAA
+!define TABLE_HEADER_COLOR #CCCCCC
+!define TABLE_ROW_COLOR #EEEEEE
+!define RELATION_COLOR #999999
+
+!define ENTITY_START_ROW |||
+!define ENTITY_END_ROW |||
+
+!define PK_ROW (PK)
+!define FK_ROW ~ FK ~
+!define FIELD_ROW |
+
+skinparam class {
+    BorderColor TABLE_BORDER_COLOR
+    HeaderBackgroundColor TABLE_HEADER_COLOR
+    BackgroundColor TABLE_ROW_COLOR
+}
+
+entity "Credential" as credential {
+    +AccountId PK_ROW FK_ROW INT
+    PasswordHash FIELD_ROW TEXT
+    Salt FIELD_ROW VARCHAR
+}
+
+@enduml
