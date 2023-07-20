@@ -1,0 +1,135 @@
+{"time":"2023-07-16 12:24:36","message":"============= SEMERU2 RUNTIME STARTED ============="}
+{"level":"error","error":"Error 1045 (28000): Access denied for user 'semeru2'@'localhost' (using password: YES)","function":"main","message":"","time":"2023-07-16 12:24:36"}
+{"time":"2023-07-16 12:25:07","message":"============= SEMERU2 RUNTIME STARTED ============="}
+{"level":"error","error":"Error 1045 (28000): Access denied for user 'semeru2'@'localhost' (using password: YES)","function":"main","message":"","time":"2023-07-16 12:25:44"}
+{"time":"2023-07-16 12:26:36","message":"============= SEMERU2 RUNTIME STARTED ============="}
+{"time":"2023-07-16 12:26:44","message":"============= SEMERU2 ENGINE STARTING ============="}
+{"time":"2023-07-16 12:26:44","message":"App Address = localhost:7718"}
+{"time":"2023-07-16 12:37:37","message":"============= SEMERU2 RUNTIME STARTED ============="}
+{"time":"2023-07-16 12:37:37","message":"============= SEMERU2 ENGINE STARTING ============="}
+{"time":"2023-07-16 12:37:37","message":"App Address = localhost:7718"}
+{"level":"warn","function":"CheckBasicAuth","message":"Basic auth not set","time":"2023-07-16 12:42:14"}
+{"level":"warn","function":"CheckBasicAuth","message":"Username given not valid","time":"2023-07-16 12:42:29"}
+{"time":"2023-07-16 12:43:13","message":"============= SEMERU2 RUNTIME STARTED ============="}
+{"time":"2023-07-16 12:43:13","message":"============= SEMERU2 ENGINE STARTING ============="}
+{"time":"2023-07-16 12:43:13","message":"App Address = localhost:7718"}
+{"level":"warn","function":"CheckBasicAuth","message":"Username given not valid","time":"2023-07-16 12:43:18"}
+{"level":"warn","function":"CheckBasicAuth","message":"Username given not valid","time":"2023-07-16 12:43:45"}
+{"level":"warn","function":"CheckBasicAuth","message":"Username given not valid","time":"2023-07-16 12:45:12"}
+{"time":"2023-07-16 12:47:08","message":"============= SEMERU2 RUNTIME STARTED ============="}
+{"time":"2023-07-16 12:47:08","message":"============= SEMERU2 ENGINE STARTING ============="}
+{"time":"2023-07-16 12:47:08","message":"App Address = localhost:7718"}
+{"level":"info","time":"2023-07-16 12:47:32","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 12:47:32","message":"=== New Request ==="}
+{"level":"debug","function":"InsertCredential","message":{"request_id":"Ifl72pQO-cCDK-TE4o-jf6d-cZRxaxmjx7Kj","data":{"email_address":"akbar@example.com","password":"123"}},"time":"2023-07-16 12:47:32"}
+{"level":"debug","function":"InsertCredential","message":{"AccountId":0,"EmailAddress":"akbar@example.com","Password":"56111272c317b3288ab774dfcb7aab66b41dfe35","Salt":"EMsMOqA1"},"time":"2023-07-16 12:47:32"}
+{"level":"info","time":"2023-07-16 12:48:47","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 12:48:47","message":"=== New Request ==="}
+{"level":"debug","function":"InsertCredential","message":{"request_id":"Ifl72pQO-cCDK-TE4o-jf6d-cZRxaxmjx7Kj","data":{"email_address":"akbar@example.com","password":"123"}},"time":"2023-07-16 12:48:47"}
+{"level":"debug","function":"InsertCredential","message":{"AccountId":0,"EmailAddress":"akbar@example.com","Password":"910397ab5c7dd4bedfe62319af2e5117ec4bc22e","Salt":"DlAsFQQh"},"time":"2023-07-16 12:48:49"}
+{"time":"2023-07-16 12:58:56","message":"============= SEMERU2 RUNTIME STARTED ============="}
+{"time":"2023-07-16 12:58:56","message":"============= SEMERU2 ENGINE STARTING ============="}
+{"time":"2023-07-16 12:58:56","message":"App Address = localhost:7718"}
+{"level":"info","time":"2023-07-16 12:59:04","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 12:59:04","message":"=== New Request ==="}
+{"level":"debug","function":"InsertCredential","message":{"request_id":"Ifl72pQO-cCDK-TE4o-jf6d-cZRxaxmjx7Kj","data":{"email_address":"akbar@example.com","password":"123"}},"time":"2023-07-16 12:59:04"}
+{"level":"debug","function":"InsertCredential","message":{"AccountId":0,"EmailAddress":"akbar@example.com","Password":"83773a43114f4e466e92073319837f69f191d8f5","Salt":"CFGB0LWz"},"time":"2023-07-16 12:59:10"}
+{"level":"error","error":"Error 1054 (42S22): Unknown column 'password' in 'field list'","function":"InsertCredential","message":{"AccountId":0,"EmailAddress":"akbar@example.com","Password":"83773a43114f4e466e92073319837f69f191d8f5","Salt":"CFGB0LWz"},"time":"2023-07-16 12:59:10"}
+{"level":"error","error":"Error 1054 (42S22): Unknown column 'password' in 'field list'","function":"InsertCredential","message":"","time":"2023-07-16 12:59:10"}
+{"level":"error","error":"Error 1054 (42S22): Unknown column 'password' in 'field list'","function":"InsertCredential","message":{"account_id":0,"email_address":"akbar@example.com","password":"123"},"time":"2023-07-16 12:59:10"}
+{"level":"error","error":"Error 1054 (42S22): Unknown column 'password' in 'field list'","function":"InsertCredential","message":"","time":"2023-07-16 12:59:10"}
+{"level":"info","time":"2023-07-16 13:01:37","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 13:01:37","message":"=== New Request ==="}
+{"level":"debug","function":"InsertCredential","message":{"request_id":"Ifl72pQO-cCDK-TE4o-jf6d-cZRxaxmjx7Kj","data":{"email_address":"akbar@example.com","password":"123"}},"time":"2023-07-16 13:01:37"}
+{"level":"debug","function":"InsertCredential","message":{"AccountId":0,"EmailAddress":"akbar@example.com","Password":"728a4dab48c65af70f3da5f7020e48256495b7de","Salt":"BYq0sIRD"},"time":"2023-07-16 13:01:37"}
+{"level":"info","time":"2023-07-16 13:25:21","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 13:25:21","message":"=== New Request ==="}
+{"level":"error","error":"invalid character '}' looking for beginning of object key string","function":"SelectCredentialByEmail","message":"","time":"2023-07-16 13:25:21"}
+{"level":"info","time":"2023-07-16 13:25:33","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 13:25:33","message":"=== New Request ==="}
+{"level":"error","error":"invalid character '}' looking for beginning of object key string","function":"SelectCredentialByEmail","message":"","time":"2023-07-16 13:25:33"}
+{"level":"info","time":"2023-07-16 13:26:08","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 13:26:08","message":"=== New Request ==="}
+{"level":"error","error":"invalid character '}' looking for beginning of object key string","function":"SelectCredentialByEmail","message":"","time":"2023-07-16 13:26:08"}
+{"level":"info","time":"2023-07-16 13:26:35","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 13:26:35","message":"=== New Request ==="}
+{"level":"debug","function":"SelectCredentialByEmail","message":{"request_id":"LvvDIqSe-fAye-ztGI-NpWY-mIoB6w4bvCms","data":{"account_id":1,"email_address":"string","password":"string"}},"time":"2023-07-16 13:26:35"}
+{"level":"debug","function":"SelectCredentialByEmailAddress","message":{"AccountId":0,"EmailAddress":"string","Password":"","Salt":""},"time":"2023-07-16 13:26:35"}
+{"level":"error","error":"Error 1054 (42S22): Unknown column 'string' in 'where clause'","function":"SelectCredentialByEmailAddress","message":{"AccountId":0,"EmailAddress":"string","Password":"","Salt":""},"time":"2023-07-16 13:26:35"}
+{"level":"error","error":"Error 1054 (42S22): Unknown column 'string' in 'where clause'","function":"SelectCredentialByEmail","message":"","time":"2023-07-16 13:26:35"}
+{"level":"error","error":"Error 1054 (42S22): Unknown column 'string' in 'where clause'","function":"SelectCredentialByEmail","message":{"account_id":1,"email_address":"string","password":"string"},"time":"2023-07-16 13:26:35"}
+{"level":"error","error":"Error 1054 (42S22): Unknown column 'string' in 'where clause'","function":"SelectCredentialByEmail","message":"","time":"2023-07-16 13:26:35"}
+{"level":"info","time":"2023-07-16 13:26:56","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 13:26:56","message":"=== New Request ==="}
+{"level":"debug","function":"SelectCredentialByEmail","message":{"request_id":"LvvDIqSe-fAye-ztGI-NpWY-mIoB6w4bvCms","data":{"email_address":"string"}},"time":"2023-07-16 13:26:56"}
+{"level":"debug","function":"SelectCredentialByEmailAddress","message":{"AccountId":0,"EmailAddress":"string","Password":"","Salt":""},"time":"2023-07-16 13:26:56"}
+{"level":"error","error":"Error 1054 (42S22): Unknown column 'string' in 'where clause'","function":"SelectCredentialByEmailAddress","message":{"AccountId":0,"EmailAddress":"string","Password":"","Salt":""},"time":"2023-07-16 13:26:56"}
+{"level":"error","error":"Error 1054 (42S22): Unknown column 'string' in 'where clause'","function":"SelectCredentialByEmail","message":"","time":"2023-07-16 13:26:56"}
+{"level":"error","error":"Error 1054 (42S22): Unknown column 'string' in 'where clause'","function":"SelectCredentialByEmail","message":{"account_id":0,"email_address":"string","password":""},"time":"2023-07-16 13:26:56"}
+{"level":"error","error":"Error 1054 (42S22): Unknown column 'string' in 'where clause'","function":"SelectCredentialByEmail","message":"","time":"2023-07-16 13:26:56"}
+{"time":"2023-07-16 13:28:52","message":"============= SEMERU2 RUNTIME STARTED ============="}
+{"time":"2023-07-16 13:28:52","message":"============= SEMERU2 ENGINE STARTING ============="}
+{"time":"2023-07-16 13:28:52","message":"App Address = localhost:7718"}
+{"level":"info","time":"2023-07-16 13:28:54","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 13:28:54","message":"=== New Request ==="}
+{"level":"debug","function":"SelectCredentialByEmail","message":{"request_id":"LvvDIqSe-fAye-ztGI-NpWY-mIoB6w4bvCms","data":{"email_address":"string"}},"time":"2023-07-16 13:28:54"}
+{"level":"debug","function":"SelectCredentialByEmailAddress","message":{"AccountId":0,"EmailAddress":"string","Password":"","Salt":""},"time":"2023-07-16 13:28:54"}
+{"level":"info","time":"2023-07-16 13:29:06","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 13:29:06","message":"=== New Request ==="}
+{"level":"debug","function":"SelectCredentialByEmail","message":{"request_id":"LvvDIqSe-fAye-ztGI-NpWY-mIoB6w4bvCms","data":{"email_address":"akbar@example.com"}},"time":"2023-07-16 13:29:06"}
+{"level":"debug","function":"SelectCredentialByEmailAddress","message":{"AccountId":0,"EmailAddress":"akbar@example.com","Password":"","Salt":""},"time":"2023-07-16 13:29:06"}
+{"time":"2023-07-16 13:30:42","message":"============= SEMERU2 RUNTIME STARTED ============="}
+{"time":"2023-07-16 13:30:42","message":"============= SEMERU2 ENGINE STARTING ============="}
+{"time":"2023-07-16 13:30:42","message":"App Address = localhost:7718"}
+{"level":"info","time":"2023-07-16 13:30:45","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 13:30:45","message":"=== New Request ==="}
+{"level":"error","function":"SelectCredentialByEmail","message":"","time":"2023-07-16 13:30:45"}
+{"level":"info","time":"2023-07-16 13:30:54","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 13:30:54","message":"=== New Request ==="}
+{"level":"debug","function":"SelectCredentialByEmail","message":{"request_id":"8720d0d5-d964-42b5-bf16-0bbe56631a29","data":{"email_address":"akbar@example.com"}},"time":"2023-07-16 13:30:54"}
+{"level":"debug","function":"SelectCredentialByEmailAddress","message":{"AccountId":0,"EmailAddress":"akbar@example.com","Password":"","Salt":""},"time":"2023-07-16 13:30:54"}
+{"level":"info","time":"2023-07-16 13:31:01","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 13:31:01","message":"=== New Request ==="}
+{"level":"debug","function":"SelectCredentialByEmail","message":{"request_id":"8720d0d5-d964-42b5-bf16-0bbe56631a29","data":{"email_address":"akbar@example.com"}},"time":"2023-07-16 13:31:01"}
+{"level":"debug","function":"SelectCredentialByEmailAddress","message":{"AccountId":0,"EmailAddress":"akbar@example.com","Password":"","Salt":""},"time":"2023-07-16 13:31:01"}
+{"level":"info","time":"2023-07-16 13:31:03","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 13:31:03","message":"=== New Request ==="}
+{"level":"debug","function":"SelectCredentialByEmail","message":{"request_id":"8720d0d5-d964-42b5-bf16-0bbe56631a29","data":{"email_address":"akbar@example.com"}},"time":"2023-07-16 13:31:03"}
+{"level":"debug","function":"SelectCredentialByEmailAddress","message":{"AccountId":0,"EmailAddress":"akbar@example.com","Password":"","Salt":""},"time":"2023-07-16 13:31:03"}
+{"level":"info","time":"2023-07-16 13:31:06","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 13:31:06","message":"=== New Request ==="}
+{"level":"debug","function":"SelectCredentialByEmail","message":{"request_id":"8720d0d5-d964-42b5-bf16-0bbe56631a29","data":{"email_address":"akbar@example.com"}},"time":"2023-07-16 13:31:06"}
+{"level":"debug","function":"SelectCredentialByEmailAddress","message":{"AccountId":0,"EmailAddress":"akbar@example.com","Password":"","Salt":""},"time":"2023-07-16 13:31:06"}
+{"level":"info","time":"2023-07-16 13:31:26","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 13:31:26","message":"=== New Request ==="}
+{"level":"debug","function":"SelectCredentialById","message":{"request_id":"8720d0d5-d964-42b5-bf16-0bbe56631a29","data":{"account_id":100000}},"time":"2023-07-16 13:31:26"}
+{"level":"debug","function":"SelectCredentialById","message":{"AccountId":100000,"EmailAddress":"","Password":"","Salt":""},"time":"2023-07-16 13:31:26"}
+{"level":"info","time":"2023-07-16 13:31:35","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 13:31:35","message":"=== New Request ==="}
+{"level":"debug","function":"SelectCredentialById","message":{"request_id":"8720d0d5-d964-42b5-bf16-0bbe56631a29","data":{"account_id":100001}},"time":"2023-07-16 13:31:35"}
+{"level":"debug","function":"SelectCredentialById","message":{"AccountId":100001,"EmailAddress":"","Password":"","Salt":""},"time":"2023-07-16 13:31:35"}
+{"level":"info","time":"2023-07-16 13:32:43","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 13:32:43","message":"=== New Request ==="}
+{"level":"debug","function":"UpdateCredentialById","message":{"request_id":"8720d0d5-d964-42b5-bf16-0bbe56631a29","data":{"account_id":100000,"email_address":"maulana@example.com","password":"321"}},"time":"2023-07-16 13:32:43"}
+{"level":"debug","function":"UpdateCredential","message":{"AccountId":100000,"EmailAddress":"maulana@example.com","Password":"f1e0544c19ec0c4f0a6b9019432ac31e2dab1a2d","Salt":"qI4dDaiV"},"time":"2023-07-16 13:32:43"}
+{"level":"info","time":"2023-07-16 13:33:00","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 13:33:00","message":"=== New Request ==="}
+{"level":"error","function":"DeleteCredentialById","message":"","time":"2023-07-16 13:33:00"}
+{"level":"info","time":"2023-07-16 13:33:06","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 13:33:06","message":"=== New Request ==="}
+{"level":"debug","function":"DeleteCredentialById","message":{"request_id":"8720d0d5-d964-42b5-bf16-0bbe56631a29","data":{"account_id":100000}},"time":"2023-07-16 13:33:06"}
+{"level":"debug","function":"DeleteCredentialById","message":{"AccountId":100000,"EmailAddress":"","Password":"","Salt":""},"time":"2023-07-16 13:33:06"}
+{"time":"2023-07-16 13:34:01","message":"============= SEMERU2 RUNTIME STARTED ============="}
+{"time":"2023-07-16 13:34:01","message":"============= SEMERU2 ENGINE STARTING ============="}
+{"time":"2023-07-16 13:34:01","message":"App Address = localhost:7718"}
+{"level":"info","time":"2023-07-16 13:34:05","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 13:34:05","message":"=== New Request ==="}
+{"level":"debug","function":"DeleteCredentialById","message":{"request_id":"8720d0d5-d964-42b5-bf16-0bbe56631a29","data":{"account_id":100000}},"time":"2023-07-16 13:34:05"}
+{"level":"debug","function":"DeleteCredentialById","message":{"AccountId":100000,"EmailAddress":"","Password":"","Salt":""},"time":"2023-07-16 13:34:05"}
+{"level":"info","time":"2023-07-16 13:34:15","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 13:34:15","message":"=== New Request ==="}
+{"level":"error","function":"InsertCredential","message":"","time":"2023-07-16 13:34:15"}
+{"level":"info","time":"2023-07-16 13:34:27","message":"Basic auth successful"}
+{"level":"info","time":"2023-07-16 13:34:27","message":"=== New Request ==="}
+{"level":"debug","function":"InsertCredential","message":{"request_id":"8720d0d5-d964-42b5-bf16-0bbe56631a29","data":{"email_address":"akbar@example.com","password":"123"}},"time":"2023-07-16 13:34:27"}
+{"level":"debug","function":"InsertCredential","message":{"AccountId":0,"EmailAddress":"akbar@example.com","Password":"cf255f3553bc1c0105169088b85e8b0ed727068f","Salt":"FxbvHCaa"},"time":"2023-07-16 13:34:27"}

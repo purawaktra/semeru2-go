@@ -1,0 +1,439 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "This is API documentation on DataBx Semeru2 Microservices",
+    "version": "1.0.0",
+    "title": "DataBx Semeru2 Microservices",
+    "contact": {
+      "email": "akbar.muhammadakbarmaulana@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "tags": [
+    {
+      "name": "credential",
+      "description": "store information of account_id, email_address, password and hash"
+    }
+  ],
+  "paths": {
+    "/select/credential/id": {
+      "post": {
+        "tags": [
+          "credential"
+        ],
+        "summary": "Get single credential by given id",
+        "description": "Should only return single account",
+        "operationId": "GetCredentialById",
+        "security": [
+          {"basicAuth":  []}
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/xClientId"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Credential"
+        },
+        "responses": {
+          "200": {
+            "description": "GetCredentialById success, with given request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Check request, body not comply with request rules",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "You are not permitted!"
+          },
+          "500": {
+            "description": "General error, system cannot tell you what wrongs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/select/credential/email": {
+      "post": {
+        "tags": [
+          "credential"
+        ],
+        "summary": "Get single credential by given email address",
+        "description": "Should only return single account",
+        "operationId": "GetCredentialByEmail",
+        "security": [
+          {"basicAuth":  []}
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/xClientId"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Credential"
+        },
+        "responses": {
+          "200": {
+            "description": "GetCredentialById success, with given request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Check request, body not comply with request rules",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "You are not permitted!"
+          },
+          "500": {
+            "description": "General error, system cannot tell you what wrongs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/insert/credential": {
+      "post": {
+        "tags": [
+          "credential"
+        ],
+        "summary": "Insert credential by given email and password",
+        "description": "Only create single account",
+        "operationId": "InsertCredential",
+        "security": [
+          {"basicAuth":  []}
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/xClientId"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Credential"
+        },
+        "responses": {
+          "200": {
+            "description": "InsertCredential success, with given request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Check request, body not comply with request rules",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "You are not permitted!"
+          },
+          "500": {
+            "description": "General error, system cannot tell you what wrongs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/update/credential": {
+      "post": {
+        "tags": [
+          "credential"
+        ],
+        "summary": "Update credential by given account_id, email and password",
+        "description": "Only update single account",
+        "operationId": "UpdateCredential",
+        "security": [
+          {"basicAuth":  []}
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/xClientId"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Credential"
+        },
+        "responses": {
+          "200": {
+            "description": "UpdateCredential success, with given request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Check request, body not comply with request rules",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "You are not permitted!"
+          },
+          "500": {
+            "description": "General error, system cannot tell you what wrongs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/delete/credential": {
+      "post": {
+        "tags": [
+          "credential"
+        ],
+        "summary": "Delete credential by given account_id",
+        "description": "Only delete single account",
+        "operationId": "DeleteCredential",
+        "security": [
+          {"basicAuth":  []}
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/xClientId"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Credential"
+        },
+        "responses": {
+          "200": {
+            "description": "DeleteCredential success, with given request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Check request, body not comply with request rules",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "You are not permitted!"
+          },
+          "500": {
+            "description": "General error, system cannot tell you what wrongs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:7718/semeru2/api/v1"
+    }
+  ],
+  "components": {
+    "requestBodies": {
+      "Credential": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/RequestCredential"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "RequestCredential": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "account_id": {
+                "type": "integer",
+                "format": "uint",
+                "minimum": 1
+              },
+              "email_address": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "ResponseSuccess": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "response_id": {
+            "type": "string",
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}"
+          },
+          "request_id": {
+            "type": "string",
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "response_time": {
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9]$"
+          },
+          "message": {
+            "type": "string",
+            "maxLength": 256,
+            "pattern": "^.$"
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": true,
+            "maxProperties": 64
+          }
+        }
+      },
+      "ResponseError": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "response_id": {
+            "type": "string",
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}"
+
+          },
+          "request_id": {
+            "type": "string",
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "response_time": {
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9]$"
+          },
+          "error": {
+            "type": "string",
+            "maxLength": 256,
+            "pattern": "^.$"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    },
+    "parameters": {
+      "xClientId": {
+        "name": "X-Client-ID",
+        "in": "header",
+        "description": "Custom Id that defines you as caller",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "maxLength": 32,
+          "pattern": "[A-Za-z0-9]{32}"
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

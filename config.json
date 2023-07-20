@@ -1,0 +1,27 @@
+{
+  "app": {
+    "name": "semeru2",
+    "host": "localhost",
+    "port": "7718",
+    "environment": "development",
+    "log": {
+      "level": "0"
+    },
+    "auth": {
+      "username": "SMR2",
+      "password": "ADMSMR2"
+    }
+  },
+  "database":{
+    "mysql": {
+      "host": "localhost",
+      "port": "3306",
+      "schema": "semeru2",
+      "user": "semeru2",
+      "password": "UeAHjOO84PuaJib3chLbAL5v"
+    },
+    "credentials": {
+      "salt_length": "8"
+    }
+  }
+}
