@@ -18,77 +18,69 @@ func CreateSemeru2Usecase(repo Semeru2Repo) Semeru2Usecase {
 	}
 }
 
-type Semeru2UsecaseInterface interface {
-	SelectAccountById(accountId int) (Credential, error)
-	SelectCredentialByEmail(emailAddress string) (Credential, error)
-	InsertCredential(query Credential) error
-	UpdateCredentialById(query Credential) error
-	DeleteCredentialById(query Credential) error
-}
-
-func (uc Semeru2Usecase) SelectAccountById(accountId int) (Credential, error) {
+func (uc Semeru2Usecase) SelectCredentialById(query Credential) (Credential, error, string) {
 	// create check input on account id and offset
-	if accountId < 1 {
-		utils.Error(errors.New("accountId can not be zero or negative"), "SelectAccountById", accountId)
-		return Credential{}, errors.New("accountId can not be nil, negative or zero")
+	if query.AccountId < 1 {
+		utils.Error(errors.New("accountId can not be zero or negative"), "SelectCredentialById", query.AccountId)
+		return Credential{}, errors.New("accountId can not be nil, negative or zero"), "FC"
 	}
 
 	// convert input to entity
-	query := entities.Credential{AccountId: uint(accountId)}
+	entity := entities.Credential{AccountId: uint(query.AccountId)}
 
 	// call repo for the account id and check err
-	account, err := uc.repo.SelectCredentialById(query)
+	credential, err, code := uc.repo.SelectCredentialById(entity)
 	if err != nil {
-		utils.Error(err, "SelectAccountById", query)
-		return Credential{}, err
+		utils.Error(err, "SelectCredentialById", query)
+		return Credential{}, err, code
 	}
 
 	// convert a result to dto and create return
 	result := Credential{
-		AccountId:    int(account.AccountId),
-		EmailAddress: account.EmailAddress,
-		Password:     account.Password,
-		Salt:         account.Salt,
+		AccountId:    int(credential.AccountId),
+		EmailAddress: credential.EmailAddress,
+		Password:     credential.Password,
+		Salt:         credential.Salt,
 	}
-	return result, nil
+	return result, nil, code
 }
 
-func (uc Semeru2Usecase) SelectCredentialByEmail(emailAddress string) (Credential, error) {
+func (uc Semeru2Usecase) SelectCredentialByEmail(query Credential) (Credential, error, string) {
 	// create check input on account email address
-	if emailAddress == "" {
+	if query.EmailAddress == "" {
 		utils.Error(errors.New("emailAddress can not be empty"), "SelectCredentialByEmail", "")
-		return Credential{}, errors.New("emailAddress can not be empty")
+		return Credential{}, errors.New("emailAddress can not be empty"), "FC"
 	}
 
 	// convert input to entity
-	query := entities.Credential{EmailAddress: emailAddress}
+	entity := entities.Credential{EmailAddress: query.EmailAddress}
 
 	// call repo for the account email address and check err
-	account, err := uc.repo.SelectCredentialByEmailAddress(query)
+	credential, err, code := uc.repo.SelectCredentialByEmailAddress(entity)
 	if err != nil {
 		utils.Error(err, "SelectCredentialByEmail", "")
-		return Credential{}, err
+		return Credential{}, err, code
 	}
 
 	// convert a result to dto and create return
 	result := Credential{
-		AccountId:    int(account.AccountId),
-		EmailAddress: account.EmailAddress,
-		Password:     account.Password,
-		Salt:         account.Salt,
+		AccountId:    int(credential.AccountId),
+		EmailAddress: credential.EmailAddress,
+		Password:     credential.Password,
+		Salt:         credential.Salt,
 	}
-	return result, nil
+	return result, nil, code
 }
 
-func (uc Semeru2Usecase) InsertCredential(query Credential) error {
+func (uc Semeru2Usecase) InsertCredential(query Credential) (error, string) {
 	// create check input on credential
 	if query.EmailAddress == "" {
 		utils.Error(errors.New("emailAddress can not be empty"), "InsertCredential", "")
-		return errors.New("emailAddress can not be empty")
+		return errors.New("emailAddress can not be empty"), "FC"
 	}
 	if query.Password == "" {
 		utils.Error(errors.New("password can not be empty"), "InsertCredential", "")
-		return errors.New("password can not be empty")
+		return errors.New("password can not be empty"), "FC"
 	}
 
 	// generate salt and hash password
@@ -96,7 +88,7 @@ func (uc Semeru2Usecase) InsertCredential(query Credential) error {
 	hash, err := functions.GenerateSHA1Hash(fmt.Sprintf("%s%s", query.Password, salt))
 	if err != nil {
 		utils.Error(err, "InsertCredential", "")
-		return err
+		return err, "FH"
 	}
 
 	// convert city input to entity
@@ -107,29 +99,29 @@ func (uc Semeru2Usecase) InsertCredential(query Credential) error {
 	}
 
 	// call usecase and check err
-	err = uc.repo.InsertCredential(credential)
+	err, code := uc.repo.InsertCredential(credential)
 	if err != nil {
 		utils.Error(err, "InsertCredential", "")
-		return err
+		return err, code
 	}
 
 	// create return
-	return nil
+	return nil, code
 }
 
-func (uc Semeru2Usecase) UpdateCredentialById(query Credential) error {
+func (uc Semeru2Usecase) UpdateCredentialById(query Credential) (error, string) {
 	// create check input on credential
 	if query.AccountId < 1 {
 		utils.Error(errors.New("accountId can not be zero or negative"), "UpdateCredentialById", query)
-		return errors.New("accountId can not be nil, negative or zero")
+		return errors.New("accountId can not be nil, negative or zero"), "FC"
 	}
 	if query.EmailAddress == "" {
 		utils.Error(errors.New("emailAddress can not be empty"), "UpdateCredentialById", "")
-		return errors.New("emailAddress can not be empty")
+		return errors.New("emailAddress can not be empty"), "FC"
 	}
 	if query.Password == "" {
 		utils.Error(errors.New("password can not be empty"), "UpdateCredentialById", "")
-		return errors.New("password can not be empty")
+		return errors.New("password can not be empty"), "FC"
 	}
 
 	// generate salt and hash password
@@ -137,7 +129,7 @@ func (uc Semeru2Usecase) UpdateCredentialById(query Credential) error {
 	hash, err := functions.GenerateSHA1Hash(fmt.Sprintf("%s%s", query.Password, salt))
 	if err != nil {
 		utils.Error(err, "UpdateCredentialById", "")
-		return err
+		return err, "FH"
 	}
 
 	// convert city input to entity
@@ -149,21 +141,21 @@ func (uc Semeru2Usecase) UpdateCredentialById(query Credential) error {
 	}
 
 	// call usecase and check err
-	err = uc.repo.UpdateCredentialById(credential)
+	err, code := uc.repo.UpdateCredentialById(credential)
 	if err != nil {
 		utils.Error(err, "UpdateCredentialById", "")
-		return err
+		return err, code
 	}
 
 	// create return
-	return nil
+	return nil, code
 }
 
-func (uc Semeru2Usecase) DeleteCredentialById(query Credential) error {
+func (uc Semeru2Usecase) DeleteCredentialById(query Credential) (error, string) {
 	// create check input on credential
 	if query.AccountId < 1 {
 		utils.Error(errors.New("accountId can not be zero or negative"), "DeleteCredentialById", query)
-		return errors.New("accountId can not be nil, negative or zero")
+		return errors.New("accountId can not be nil, negative or zero"), "FH"
 	}
 
 	// convert city input to entity
@@ -172,12 +164,12 @@ func (uc Semeru2Usecase) DeleteCredentialById(query Credential) error {
 	}
 
 	// call usecase and check err
-	err := uc.repo.DeleteCredentialById(credential)
+	err, code := uc.repo.DeleteCredentialById(credential)
 	if err != nil {
 		utils.Error(err, "DeleteCredentialById", "")
-		return err
+		return err, code
 	}
 
 	// create return
-	return nil
+	return nil, code
 }

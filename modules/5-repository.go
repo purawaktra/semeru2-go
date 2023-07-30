@@ -17,15 +17,7 @@ func CreateSemeru2Repo(gorm *gorm.DB) Semeru2Repo {
 	}
 }
 
-type Semeru2RepoInterface interface {
-	SelectCredentialById(query entities.Credential) (entities.Credential, error)
-	SelectCredentialByEmailAddress(query entities.Credential) (entities.Credential, error)
-	InsertCredential(query entities.Credential) error
-	UpdateCredentialById(query entities.Credential) error
-	DeleteCredentialById(query entities.Credential) error
-}
-
-func (sr Semeru2Repo) SelectCredentialById(query entities.Credential) (entities.Credential, error) {
+func (sr Semeru2Repo) SelectCredentialById(query entities.Credential) (entities.Credential, error, string) {
 	utils.Debug("SelectCredentialById", query)
 
 	var credential entities.Credential
@@ -35,12 +27,12 @@ func (sr Semeru2Repo) SelectCredentialById(query entities.Credential) (entities.
 	err := tx.Error
 	if err != nil {
 		utils.Error(err, "SelectCredentialById", query)
-		return entities.Credential{}, err
+		return entities.Credential{}, err, "DB"
 	}
-	return credential, nil
+	return credential, nil, "00"
 }
 
-func (sr Semeru2Repo) SelectCredentialByEmailAddress(query entities.Credential) (entities.Credential, error) {
+func (sr Semeru2Repo) SelectCredentialByEmailAddress(query entities.Credential) (entities.Credential, error, string) {
 	utils.Debug("SelectCredentialByEmailAddress", query)
 
 	var credential entities.Credential
@@ -50,12 +42,12 @@ func (sr Semeru2Repo) SelectCredentialByEmailAddress(query entities.Credential) 
 	err := tx.Error
 	if err != nil {
 		utils.Error(err, "SelectCredentialByEmailAddress", query)
-		return entities.Credential{}, err
+		return entities.Credential{}, err, "DB"
 	}
-	return credential, nil
+	return credential, nil, "00"
 }
 
-func (sr Semeru2Repo) InsertCredential(query entities.Credential) error {
+func (sr Semeru2Repo) InsertCredential(query entities.Credential) (error, string) {
 	utils.Debug("InsertCredential", query)
 
 	tx := sr.db.Exec(
@@ -66,12 +58,12 @@ func (sr Semeru2Repo) InsertCredential(query entities.Credential) error {
 	err := tx.Error
 	if err != nil {
 		utils.Error(err, "InsertCredential", query)
-		return err
+		return err, "DB"
 	}
-	return nil
+	return nil, "00"
 }
 
-func (sr Semeru2Repo) UpdateCredentialById(query entities.Credential) error {
+func (sr Semeru2Repo) UpdateCredentialById(query entities.Credential) (error, string) {
 	utils.Debug("UpdateCredential", query)
 
 	tx := sr.db.Exec(
@@ -83,12 +75,12 @@ func (sr Semeru2Repo) UpdateCredentialById(query entities.Credential) error {
 	err := tx.Error
 	if err != nil {
 		utils.Error(err, "UpdateCredential", query)
-		return err
+		return err, "DB"
 	}
-	return nil
+	return nil, "00"
 }
 
-func (sr Semeru2Repo) DeleteCredentialById(query entities.Credential) error {
+func (sr Semeru2Repo) DeleteCredentialById(query entities.Credential) (error, string) {
 	utils.Debug("DeleteCredentialById", query)
 
 	tx := sr.db.Exec(
@@ -97,7 +89,7 @@ func (sr Semeru2Repo) DeleteCredentialById(query entities.Credential) error {
 	err := tx.Error
 	if err != nil {
 		utils.Error(err, "DeleteCredentialById", query)
-		return err
+		return err, "DB"
 	}
-	return nil
+	return nil, "00"
 }

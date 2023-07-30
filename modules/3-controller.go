@@ -2,11 +2,8 @@ package modules
 
 import (
 	"encoding/json"
-	"github.com/google/uuid"
 	"github.com/purawaktra/semeru2-go/dto"
 	"github.com/purawaktra/semeru2-go/utils"
-	"strconv"
-	"time"
 )
 
 type Semeru2Controller struct {
@@ -19,202 +16,63 @@ func CreateSemeru2Controller(uc Semeru2Usecase) Semeru2Controller {
 	}
 }
 
-type Semeru2ControllerInterface interface {
-	SelectCredentialById(req dto.Request) (any, error)
-	SelectCredentialByEmail(req dto.Request) (any, error)
-	InsertCredential(req dto.Request) (any, error)
-	UpdateCredentialById(req dto.Request) (any, error)
-	DeleteCredentialById(req dto.Request) (any, error)
-}
-
-func (ctrl Semeru2Controller) SelectCredentialById(req dto.Request) (any, error) {
-	// start timer
-	start := time.Now()
-
-	// marshal to json data and check err
-	marshaledData, err := json.Marshal(req.Data)
+func (ctrl Semeru2Controller) SelectCredentialById(req []byte) (any, error, string) {
+	// unmarshal to struct and check err
+	var requestData dto.BodyCredential
+	err := json.Unmarshal(req, &requestData)
 	if err != nil {
-		utils.Error(err, "SelectAccountById", req.Data)
-
-		end := time.Now()
-		return dto.ResponseError{
-			BaseResponse: dto.BaseResponse{
-				ResponseId:   uuid.New().String(),
-				RequestId:    req.RequestId,
-				Success:      false,
-				ResponseTime: strconv.FormatInt(end.Sub(start).Microseconds(), 10),
-			},
-			Errors: err.Error(),
-		}, err
+		utils.Error(err, "SelectCredentialById", requestData)
+		return nil, err, "FM"
 	}
 
-	// unmarshal to struct and check err
-	var requestData dto.RequestCredential
-	err = json.Unmarshal(marshaledData, &requestData)
-	if err != nil {
-		utils.Error(err, "SelectAccountById", requestData)
-		// stop timer
-		end := time.Now()
-
-		return dto.ResponseError{
-			BaseResponse: dto.BaseResponse{
-				ResponseId:   uuid.New().String(),
-				RequestId:    req.RequestId,
-				Success:      false,
-				ResponseTime: strconv.FormatInt(end.Sub(start).Microseconds(), 10),
-			},
-			Errors: err.Error(),
-		}, err
+	// convert request to dto
+	query := Credential{
+		AccountId: requestData.AccountId,
 	}
 
 	// call usecase for the credential and check err
-	credential, err := ctrl.uc.SelectAccountById(requestData.AccountId)
+	credential, err, code := ctrl.uc.SelectCredentialById(query)
 	if err != nil {
-		utils.Error(err, "SelectAccountById", requestData)
-		// stop timer
-		end := time.Now()
-
-		return dto.ResponseError{
-			BaseResponse: dto.BaseResponse{
-				ResponseId:   uuid.New().String(),
-				RequestId:    req.RequestId,
-				Success:      false,
-				ResponseTime: strconv.FormatInt(end.Sub(start).Microseconds(), 10),
-			},
-			Errors: err.Error(),
-		}, err
-	}
-
-	// convert dto to response
-	end := time.Now()
-	result := dto.ResponseSuccess{
-		BaseResponse: dto.BaseResponse{
-			ResponseId:   uuid.New().String(),
-			RequestId:    req.RequestId,
-			Success:      true,
-			ResponseTime: strconv.FormatInt(end.Sub(start).Microseconds(), 10),
-		},
-		Message: "Success SelectAccountById",
-		Data:    credential,
+		utils.Error(err, "SelectCredentialById", requestData)
+		return nil, err, code
 	}
 
 	// create return
-	return result, nil
+	return credential, nil, code
 }
 
-func (ctrl Semeru2Controller) SelectCredentialByEmail(req dto.Request) (any, error) {
-	// start timer
-	start := time.Now()
-
-	// marshal to json data and check err
-	marshaledData, err := json.Marshal(req.Data)
-	if err != nil {
-		utils.Error(err, "SelectCredentialByEmail", req.Data)
-
-		end := time.Now()
-		return dto.ResponseError{
-			BaseResponse: dto.BaseResponse{
-				ResponseId:   uuid.New().String(),
-				RequestId:    req.RequestId,
-				Success:      false,
-				ResponseTime: strconv.FormatInt(end.Sub(start).Microseconds(), 10),
-			},
-			Errors: err.Error(),
-		}, err
-	}
-
+func (ctrl Semeru2Controller) SelectCredentialByEmail(req []byte) (any, error, string) {
 	// unmarshal to struct and check err
-	var requestData dto.RequestCredential
-	err = json.Unmarshal(marshaledData, &requestData)
+	var requestData dto.BodyCredential
+	err := json.Unmarshal(req, &requestData)
 	if err != nil {
 		utils.Error(err, "SelectCredentialByEmail", requestData)
-		// stop timer
-		end := time.Now()
+		return nil, err, "FM"
+	}
 
-		return dto.ResponseError{
-			BaseResponse: dto.BaseResponse{
-				ResponseId:   uuid.New().String(),
-				RequestId:    req.RequestId,
-				Success:      false,
-				ResponseTime: strconv.FormatInt(end.Sub(start).Microseconds(), 10),
-			},
-			Errors: err.Error(),
-		}, err
+	// convert request to dto
+	query := Credential{
+		EmailAddress: requestData.EmailAddress,
 	}
 
 	// call usecase for the credential and check err
-	credential, err := ctrl.uc.SelectCredentialByEmail(requestData.EmailAddress)
+	credential, err, code := ctrl.uc.SelectCredentialByEmail(query)
 	if err != nil {
 		utils.Error(err, "SelectCredentialByEmail", requestData)
-		// stop timer
-		end := time.Now()
-
-		return dto.ResponseError{
-			BaseResponse: dto.BaseResponse{
-				ResponseId:   uuid.New().String(),
-				RequestId:    req.RequestId,
-				Success:      false,
-				ResponseTime: strconv.FormatInt(end.Sub(start).Microseconds(), 10),
-			},
-			Errors: err.Error(),
-		}, err
-	}
-
-	// convert dto to response
-	end := time.Now()
-	result := dto.ResponseSuccess{
-		BaseResponse: dto.BaseResponse{
-			ResponseId:   uuid.New().String(),
-			RequestId:    req.RequestId,
-			Success:      true,
-			ResponseTime: strconv.FormatInt(end.Sub(start).Microseconds(), 10),
-		},
-		Message: "Success SelectCredentialByEmail",
-		Data:    credential,
+		return nil, err, code
 	}
 
 	// create return
-	return result, nil
+	return credential, nil, code
 }
 
-func (ctrl Semeru2Controller) InsertCredential(req dto.Request) (any, error) {
-	// start timer
-	start := time.Now()
-
-	// marshal to json data and check err
-	marshaledData, err := json.Marshal(req.Data)
-	if err != nil {
-		utils.Error(err, "InsertCredential", req.Data)
-
-		end := time.Now()
-		return dto.ResponseError{
-			BaseResponse: dto.BaseResponse{
-				ResponseId:   uuid.New().String(),
-				RequestId:    req.RequestId,
-				Success:      false,
-				ResponseTime: strconv.FormatInt(end.Sub(start).Microseconds(), 10),
-			},
-			Errors: err.Error(),
-		}, err
-	}
-
+func (ctrl Semeru2Controller) InsertCredential(req []byte) (error, string) {
 	// unmarshal to struct and check err
-	var requestData dto.RequestCredential
-	err = json.Unmarshal(marshaledData, &requestData)
+	var requestData dto.BodyCredential
+	err := json.Unmarshal(req, &requestData)
 	if err != nil {
 		utils.Error(err, "InsertCredential", requestData)
-		// stop timer
-		end := time.Now()
-
-		return dto.ResponseError{
-			BaseResponse: dto.BaseResponse{
-				ResponseId:   uuid.New().String(),
-				RequestId:    req.RequestId,
-				Success:      false,
-				ResponseTime: strconv.FormatInt(end.Sub(start).Microseconds(), 10),
-			},
-			Errors: err.Error(),
-		}, err
+		return err, "FM"
 	}
 
 	// convert request to dto
@@ -224,77 +82,23 @@ func (ctrl Semeru2Controller) InsertCredential(req dto.Request) (any, error) {
 	}
 
 	// call usecase for the credential and check err
-	err = ctrl.uc.InsertCredential(query)
+	err, code := ctrl.uc.InsertCredential(query)
 	if err != nil {
 		utils.Error(err, "InsertCredential", requestData)
-		// stop timer
-		end := time.Now()
-
-		return dto.ResponseError{
-			BaseResponse: dto.BaseResponse{
-				ResponseId:   uuid.New().String(),
-				RequestId:    req.RequestId,
-				Success:      false,
-				ResponseTime: strconv.FormatInt(end.Sub(start).Microseconds(), 10),
-			},
-			Errors: err.Error(),
-		}, err
-	}
-
-	// convert dto to response
-	end := time.Now()
-	result := dto.ResponseSuccess{
-		BaseResponse: dto.BaseResponse{
-			ResponseId:   uuid.New().String(),
-			RequestId:    req.RequestId,
-			Success:      true,
-			ResponseTime: strconv.FormatInt(end.Sub(start).Microseconds(), 10),
-		},
-		Message: "Success InsertCredential",
+		return err, code
 	}
 
 	// create return
-	return result, nil
+	return nil, code
 }
 
-func (ctrl Semeru2Controller) UpdateCredentialById(req dto.Request) (any, error) {
-	// start timer
-	start := time.Now()
-
-	// marshal to json data and check err
-	marshaledData, err := json.Marshal(req.Data)
-	if err != nil {
-		utils.Error(err, "UpdateCredentialById", req.Data)
-
-		end := time.Now()
-		return dto.ResponseError{
-			BaseResponse: dto.BaseResponse{
-				ResponseId:   uuid.New().String(),
-				RequestId:    req.RequestId,
-				Success:      false,
-				ResponseTime: strconv.FormatInt(end.Sub(start).Microseconds(), 10),
-			},
-			Errors: err.Error(),
-		}, err
-	}
-
+func (ctrl Semeru2Controller) UpdateCredentialById(req []byte) (error, string) {
 	// unmarshal to struct and check err
-	var requestData dto.RequestCredential
-	err = json.Unmarshal(marshaledData, &requestData)
+	var requestData dto.BodyCredential
+	err := json.Unmarshal(req, &requestData)
 	if err != nil {
 		utils.Error(err, "UpdateCredentialById", requestData)
-		// stop timer
-		end := time.Now()
-
-		return dto.ResponseError{
-			BaseResponse: dto.BaseResponse{
-				ResponseId:   uuid.New().String(),
-				RequestId:    req.RequestId,
-				Success:      false,
-				ResponseTime: strconv.FormatInt(end.Sub(start).Microseconds(), 10),
-			},
-			Errors: err.Error(),
-		}, err
+		return err, "FM"
 	}
 
 	// convert request to dto
@@ -305,77 +109,23 @@ func (ctrl Semeru2Controller) UpdateCredentialById(req dto.Request) (any, error)
 	}
 
 	// call usecase for the credential and check err
-	err = ctrl.uc.UpdateCredentialById(query)
+	err, code := ctrl.uc.UpdateCredentialById(query)
 	if err != nil {
 		utils.Error(err, "UpdateCredentialById", requestData)
-		// stop timer
-		end := time.Now()
-
-		return dto.ResponseError{
-			BaseResponse: dto.BaseResponse{
-				ResponseId:   uuid.New().String(),
-				RequestId:    req.RequestId,
-				Success:      false,
-				ResponseTime: strconv.FormatInt(end.Sub(start).Microseconds(), 10),
-			},
-			Errors: err.Error(),
-		}, err
-	}
-
-	// convert dto to response
-	end := time.Now()
-	result := dto.ResponseSuccess{
-		BaseResponse: dto.BaseResponse{
-			ResponseId:   uuid.New().String(),
-			RequestId:    req.RequestId,
-			Success:      true,
-			ResponseTime: strconv.FormatInt(end.Sub(start).Microseconds(), 10),
-		},
-		Message: "Success UpdateCredentialById",
+		return err, code
 	}
 
 	// create return
-	return result, nil
+	return nil, code
 }
 
-func (ctrl Semeru2Controller) DeleteCredentialById(req dto.Request) (any, error) {
-	// start timer
-	start := time.Now()
-
-	// marshal to json data and check err
-	marshaledData, err := json.Marshal(req.Data)
-	if err != nil {
-		utils.Error(err, "DeleteCredentialById", req.Data)
-
-		end := time.Now()
-		return dto.ResponseError{
-			BaseResponse: dto.BaseResponse{
-				ResponseId:   uuid.New().String(),
-				RequestId:    req.RequestId,
-				Success:      false,
-				ResponseTime: strconv.FormatInt(end.Sub(start).Microseconds(), 10),
-			},
-			Errors: err.Error(),
-		}, err
-	}
-
+func (ctrl Semeru2Controller) DeleteCredentialById(req []byte) (error, string) {
 	// unmarshal to struct and check err
-	var requestData dto.RequestCredential
-	err = json.Unmarshal(marshaledData, &requestData)
+	var requestData dto.BodyCredential
+	err := json.Unmarshal(req, &requestData)
 	if err != nil {
 		utils.Error(err, "DeleteCredentialById", requestData)
-		// stop timer
-		end := time.Now()
-
-		return dto.ResponseError{
-			BaseResponse: dto.BaseResponse{
-				ResponseId:   uuid.New().String(),
-				RequestId:    req.RequestId,
-				Success:      false,
-				ResponseTime: strconv.FormatInt(end.Sub(start).Microseconds(), 10),
-			},
-			Errors: err.Error(),
-		}, err
+		return err, "FM"
 	}
 
 	// convert request to dto
@@ -384,35 +134,12 @@ func (ctrl Semeru2Controller) DeleteCredentialById(req dto.Request) (any, error)
 	}
 
 	// call usecase for the credential and check err
-	err = ctrl.uc.DeleteCredentialById(query)
+	err, code := ctrl.uc.DeleteCredentialById(query)
 	if err != nil {
 		utils.Error(err, "DeleteCredentialById", requestData)
-		// stop timer
-		end := time.Now()
-
-		return dto.ResponseError{
-			BaseResponse: dto.BaseResponse{
-				ResponseId:   uuid.New().String(),
-				RequestId:    req.RequestId,
-				Success:      false,
-				ResponseTime: strconv.FormatInt(end.Sub(start).Microseconds(), 10),
-			},
-			Errors: err.Error(),
-		}, err
-	}
-
-	// convert dto to response
-	end := time.Now()
-	result := dto.ResponseSuccess{
-		BaseResponse: dto.BaseResponse{
-			ResponseId:   uuid.New().String(),
-			RequestId:    req.RequestId,
-			Success:      true,
-			ResponseTime: strconv.FormatInt(end.Sub(start).Microseconds(), 10),
-		},
-		Message: "Success DeleteCredentialById",
+		return err, code
 	}
 
 	// create return
-	return result, nil
+	return nil, code
 }

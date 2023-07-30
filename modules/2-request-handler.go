@@ -6,6 +6,8 @@ import (
 	"github.com/purawaktra/semeru2-go/functions"
 	"github.com/purawaktra/semeru2-go/utils"
 	"net/http"
+	"strconv"
+	"time"
 )
 
 type Semeru2RequestHandler struct {
@@ -18,185 +20,367 @@ func CreateSemeru2RequestHandler(ctrl Semeru2Controller) Semeru2RequestHandler {
 	}
 }
 
-type Semeru2RequestHandlerInterface interface {
-	SelectCredentialById(c *gin.Context)
-	SelectCredentialByEmail(c *gin.Context)
-	InsertCredential(c *gin.Context)
-	UpdateCredentialById(c *gin.Context)
-	DeleteCredentialById(c *gin.Context)
-}
-
 func (rh Semeru2RequestHandler) SelectCredentialById(c *gin.Context) {
 	utils.Info("=== New Request ===")
+	// start timer
+	start := time.Now()
 
-	// parse request body to struct
-	var requestBody dto.Request
-	err := c.Bind(&requestBody)
-
-	// check for error on parse request body
+	// get header and check for err
+	var header dto.Header
+	err := c.BindHeader(&header)
 	if err != nil {
 		utils.Error(err, "SelectCredentialById", "")
+		end := time.Now()
+		functions.SetBaseHeader(c,
+			header.RequestId,
+			strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+			"FH",
+			err.Error())
 		c.Data(http.StatusBadRequest, "", nil)
 		return
 	}
 
 	// check for request id
-	if !functions.IsValidUUID(requestBody.RequestId) {
+	if !functions.IsValidUUID(header.RequestId) {
 		utils.Error(err, "SelectCredentialById", "")
+		end := time.Now()
+		functions.SetBaseHeader(c,
+			header.RequestId,
+			strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+			"UU",
+			err.Error())
+		c.Data(http.StatusBadRequest, "", nil)
+		return
+	}
+
+	// parse request body to struct and check err
+	bodyBytes, err := c.GetRawData()
+	if err != nil {
+		utils.Error(err, "SelectCredentialById", "")
+		end := time.Now()
+		functions.SetBaseHeader(c,
+			header.RequestId,
+			strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+			"FB",
+			err.Error())
 		c.Data(http.StatusBadRequest, "", nil)
 		return
 	}
 
 	// call controller for the credential and check err
-	utils.Debug("SelectCredentialById", requestBody)
-	response, err := rh.ctrl.SelectCredentialById(requestBody)
+	utils.Debug("SelectCredentialById", header)
+	data, err, code := rh.ctrl.SelectCredentialById(bodyBytes)
 	if err != nil {
 		utils.Error(err, "SelectCredentialById", "")
-		c.JSON(http.StatusInternalServerError, response)
+		end := time.Now()
+		functions.SetBaseHeader(c,
+			header.RequestId,
+			strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+			code,
+			err.Error())
+		c.Data(http.StatusInternalServerError, "", nil)
 		return
 	}
 
 	// create success return
-	c.JSON(http.StatusOK, response)
+	end := time.Now()
+	functions.SetBaseHeader(c,
+		header.RequestId,
+		strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+		code,
+		"Success")
+	c.JSON(http.StatusOK, data)
 	return
 }
 
 func (rh Semeru2RequestHandler) SelectCredentialByEmail(c *gin.Context) {
 	utils.Info("=== New Request ===")
+	// start timer
+	start := time.Now()
 
-	// parse request body to struct
-	var requestBody dto.Request
-	err := c.Bind(&requestBody)
-
-	// check for error on parse request body
+	// get header and check for err
+	var header dto.Header
+	err := c.BindHeader(&header)
 	if err != nil {
 		utils.Error(err, "SelectCredentialByEmail", "")
+		end := time.Now()
+		functions.SetBaseHeader(c,
+			header.RequestId,
+			strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+			"FH",
+			err.Error())
 		c.Data(http.StatusBadRequest, "", nil)
 		return
 	}
 
 	// check for request id
-	if !functions.IsValidUUID(requestBody.RequestId) {
+	if !functions.IsValidUUID(header.RequestId) {
 		utils.Error(err, "SelectCredentialByEmail", "")
+		end := time.Now()
+		functions.SetBaseHeader(c,
+			header.RequestId,
+			strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+			"UU",
+			err.Error())
+		c.Data(http.StatusBadRequest, "", nil)
+		return
+	}
+
+	// parse request body to struct and check err
+	bodyBytes, err := c.GetRawData()
+	if err != nil {
+		utils.Error(err, "SelectCredentialByEmail", "")
+		end := time.Now()
+		functions.SetBaseHeader(c,
+			header.RequestId,
+			strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+			"FB",
+			err.Error())
 		c.Data(http.StatusBadRequest, "", nil)
 		return
 	}
 
 	// call controller for the credential and check err
-	utils.Debug("SelectCredentialByEmail", requestBody)
-	response, err := rh.ctrl.SelectCredentialByEmail(requestBody)
+	utils.Debug("SelectCredentialByEmail", header)
+	data, err, code := rh.ctrl.SelectCredentialByEmail(bodyBytes)
 	if err != nil {
 		utils.Error(err, "SelectCredentialByEmail", "")
-		c.JSON(http.StatusInternalServerError, response)
+		end := time.Now()
+		functions.SetBaseHeader(c,
+			header.RequestId,
+			strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+			code,
+			err.Error())
+		c.Data(http.StatusInternalServerError, "", nil)
 		return
 	}
 
 	// create success return
-	c.JSON(http.StatusOK, response)
+	end := time.Now()
+	functions.SetBaseHeader(c,
+		header.RequestId,
+		strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+		code,
+		"Success")
+	c.JSON(http.StatusOK, data)
 	return
 }
 
 func (rh Semeru2RequestHandler) InsertCredential(c *gin.Context) {
 	utils.Info("=== New Request ===")
+	// start timer
+	start := time.Now()
 
-	// parse request body to struct
-	var requestBody dto.Request
-	err := c.Bind(&requestBody)
-
-	// check for error on parse request body
+	// get header and check for err
+	var header dto.Header
+	err := c.BindHeader(&header)
 	if err != nil {
 		utils.Error(err, "InsertCredential", "")
+		end := time.Now()
+		functions.SetBaseHeader(c,
+			header.RequestId,
+			strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+			"FH",
+			err.Error())
 		c.Data(http.StatusBadRequest, "", nil)
 		return
 	}
 
 	// check for request id
-	if !functions.IsValidUUID(requestBody.RequestId) {
+	if !functions.IsValidUUID(header.RequestId) {
 		utils.Error(err, "InsertCredential", "")
+		end := time.Now()
+		functions.SetBaseHeader(c,
+			header.RequestId,
+			strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+			"UU",
+			err.Error())
+		c.Data(http.StatusBadRequest, "", nil)
+		return
+	}
+
+	// parse request body to struct and check err
+	bodyBytes, err := c.GetRawData()
+	if err != nil {
+		utils.Error(err, "InsertCredential", "")
+		end := time.Now()
+		functions.SetBaseHeader(c,
+			header.RequestId,
+			strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+			"FB",
+			err.Error())
 		c.Data(http.StatusBadRequest, "", nil)
 		return
 	}
 
 	// call controller for the credential and check err
-	utils.Debug("InsertCredential", requestBody)
-	response, err := rh.ctrl.InsertCredential(requestBody)
+	utils.Debug("InsertCredential", header)
+	err, code := rh.ctrl.InsertCredential(bodyBytes)
 	if err != nil {
 		utils.Error(err, "InsertCredential", "")
-		c.JSON(http.StatusInternalServerError, response)
+		end := time.Now()
+		functions.SetBaseHeader(c,
+			header.RequestId,
+			strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+			code,
+			err.Error())
+		c.Data(http.StatusInternalServerError, "", nil)
 		return
 	}
 
 	// create success return
-	c.JSON(http.StatusOK, response)
+	end := time.Now()
+	functions.SetBaseHeader(c,
+		header.RequestId,
+		strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+		code,
+		"Success")
+	c.JSON(http.StatusOK, nil)
 	return
 }
 
-func (rh Semeru2RequestHandler) UpdateCredentialById(c *gin.Context) {
+func (rh Semeru2RequestHandler) UpdateCredential(c *gin.Context) {
 	utils.Info("=== New Request ===")
+	// start timer
+	start := time.Now()
 
-	// parse request body to struct
-	var requestBody dto.Request
-	err := c.Bind(&requestBody)
-
-	// check for error on parse request body
+	// get header and check for err
+	var header dto.Header
+	err := c.BindHeader(&header)
 	if err != nil {
-		utils.Error(err, "UpdateCredentialById", "")
+		utils.Error(err, "UpdateCredential", "")
+		end := time.Now()
+		functions.SetBaseHeader(c,
+			header.RequestId,
+			strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+			"FH",
+			err.Error())
 		c.Data(http.StatusBadRequest, "", nil)
 		return
 	}
 
 	// check for request id
-	if !functions.IsValidUUID(requestBody.RequestId) {
-		utils.Error(err, "UpdateCredentialById", "")
+	if !functions.IsValidUUID(header.RequestId) {
+		utils.Error(err, "UpdateCredential", "")
+		end := time.Now()
+		functions.SetBaseHeader(c,
+			header.RequestId,
+			strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+			"UU",
+			err.Error())
+		c.Data(http.StatusBadRequest, "", nil)
+		return
+	}
+
+	// parse request body to struct and check err
+	bodyBytes, err := c.GetRawData()
+	if err != nil {
+		utils.Error(err, "UpdateCredential", "")
+		end := time.Now()
+		functions.SetBaseHeader(c,
+			header.RequestId,
+			strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+			"FB",
+			err.Error())
 		c.Data(http.StatusBadRequest, "", nil)
 		return
 	}
 
 	// call controller for the credential and check err
-	utils.Debug("UpdateCredentialById", requestBody)
-	response, err := rh.ctrl.UpdateCredentialById(requestBody)
+	utils.Debug("UpdateCredential", header)
+	err, code := rh.ctrl.UpdateCredentialById(bodyBytes)
 	if err != nil {
-		utils.Error(err, "UpdateCredentialById", "")
-		c.JSON(http.StatusInternalServerError, response)
+		utils.Error(err, "UpdateCredential", "")
+		end := time.Now()
+		functions.SetBaseHeader(c,
+			header.RequestId,
+			strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+			code,
+			err.Error())
+		c.Data(http.StatusInternalServerError, "", nil)
 		return
 	}
 
 	// create success return
-	c.JSON(http.StatusOK, response)
+	end := time.Now()
+	functions.SetBaseHeader(c,
+		header.RequestId,
+		strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+		code,
+		"Success")
+	c.JSON(http.StatusOK, nil)
 	return
 }
 
-func (rh Semeru2RequestHandler) DeleteCredentialById(c *gin.Context) {
+func (rh Semeru2RequestHandler) DeleteCredential(c *gin.Context) {
 	utils.Info("=== New Request ===")
+	// start timer
+	start := time.Now()
 
-	// parse request body to struct
-	var requestBody dto.Request
-	err := c.Bind(&requestBody)
-
-	// check for error on parse request body
+	// get header and check for err
+	var header dto.Header
+	err := c.BindHeader(&header)
 	if err != nil {
-		utils.Error(err, "DeleteCredentialById", "")
+		utils.Error(err, "DeleteCredential", "")
+		end := time.Now()
+		functions.SetBaseHeader(c,
+			header.RequestId,
+			strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+			"FH",
+			err.Error())
 		c.Data(http.StatusBadRequest, "", nil)
 		return
 	}
 
 	// check for request id
-	if !functions.IsValidUUID(requestBody.RequestId) {
-		utils.Error(err, "DeleteCredentialById", "")
+	if !functions.IsValidUUID(header.RequestId) {
+		utils.Error(err, "DeleteCredential", "")
+		end := time.Now()
+		functions.SetBaseHeader(c,
+			header.RequestId,
+			strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+			"UU",
+			err.Error())
+		c.Data(http.StatusBadRequest, "", nil)
+		return
+	}
+
+	// parse request body to struct and check err
+	bodyBytes, err := c.GetRawData()
+	if err != nil {
+		utils.Error(err, "DeleteCredential", "")
+		end := time.Now()
+		functions.SetBaseHeader(c,
+			header.RequestId,
+			strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+			"FB",
+			err.Error())
 		c.Data(http.StatusBadRequest, "", nil)
 		return
 	}
 
 	// call controller for the credential and check err
-	utils.Debug("DeleteCredentialById", requestBody)
-	response, err := rh.ctrl.DeleteCredentialById(requestBody)
+	utils.Debug("DeleteCredential", header)
+	err, code := rh.ctrl.DeleteCredentialById(bodyBytes)
 	if err != nil {
-		utils.Error(err, "DeleteCredentialById", "")
-		c.JSON(http.StatusInternalServerError, response)
+		utils.Error(err, "DeleteCredential", "")
+		end := time.Now()
+		functions.SetBaseHeader(c,
+			header.RequestId,
+			strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+			code,
+			err.Error())
+		c.Data(http.StatusInternalServerError, "", nil)
 		return
 	}
 
 	// create success return
-	c.JSON(http.StatusOK, response)
+	end := time.Now()
+	functions.SetBaseHeader(c,
+		header.RequestId,
+		strconv.FormatInt(end.Sub(start).Microseconds(), 10),
+		code,
+		"Success")
+	c.JSON(http.StatusOK, nil)
 	return
 }

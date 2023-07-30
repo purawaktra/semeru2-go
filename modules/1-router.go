@@ -22,6 +22,6 @@ func (r Semeru2Router) Init(path string) {
 	pathGroup.POST("/select/credential/id", r.rh.SelectCredentialById)
 	pathGroup.POST("/select/credential/email", r.rh.SelectCredentialByEmail)
 	pathGroup.POST("/insert/credential", r.rh.InsertCredential)
-	pathGroup.POST("/update/credential", r.rh.UpdateCredentialById)
-	pathGroup.POST("/delete/credential", r.rh.DeleteCredentialById)
+	pathGroup.POST("/update/credential", r.rh.UpdateCredential)
+	pathGroup.POST("/delete/credential", r.rh.DeleteCredential)
 }

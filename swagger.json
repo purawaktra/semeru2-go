@@ -15,7 +15,7 @@
   "tags": [
     {
       "name": "credential",
-      "description": "store information of account_id, email_address, password and hash"
+      "description": "store information of account_id, email_address, password and salt"
     }
   ],
   "paths": {
@@ -32,7 +32,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/components/parameters/xClientId"
+            "$ref": "#/components/parameters/RequestId"
+          },
+          {
+            "$ref": "#/components/parameters/Host"
           }
         ],
         "requestBody": {
@@ -44,33 +47,19 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResponseSuccess"
+                  "$ref": "#/components/schemas/Credential"
                 }
               }
             }
           },
           "400": {
-            "description": "Check request, body not comply with request rules",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                }
-              }
-            }
+            "description": "Check request, body not comply with request rules"
           },
           "401": {
             "description": "You are not permitted!"
           },
           "500": {
-            "description": "General error, system cannot tell you what wrongs",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                }
-              }
-            }
+            "description": "General error, system cannot tell you what wrongs"
           }
         }
       }
@@ -88,7 +77,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/components/parameters/xClientId"
+            "$ref": "#/components/parameters/RequestId"
+          },
+          {
+            "$ref": "#/components/parameters/Host"
           }
         ],
         "requestBody": {
@@ -100,33 +92,19 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResponseSuccess"
+                  "$ref": "#/components/schemas/Credential"
                 }
               }
             }
           },
           "400": {
-            "description": "Check request, body not comply with request rules",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                }
-              }
-            }
+            "description": "Check request, body not comply with request rules"
           },
           "401": {
             "description": "You are not permitted!"
           },
           "500": {
-            "description": "General error, system cannot tell you what wrongs",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                }
-              }
-            }
+            "description": "General error, system cannot tell you what wrongs"
           }
         }
       }
@@ -144,7 +122,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/components/parameters/xClientId"
+            "$ref": "#/components/parameters/Host"
+          },
+          {
+            "$ref": "#/components/parameters/RequestId"
           }
         ],
         "requestBody": {
@@ -152,37 +133,16 @@
         },
         "responses": {
           "200": {
-            "description": "InsertCredential success, with given request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseSuccess"
-                }
-              }
-            }
+            "description": "InsertCredential success, with given request"
           },
           "400": {
-            "description": "Check request, body not comply with request rules",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                }
-              }
-            }
+            "description": "Check request, body not comply with request rules"
           },
           "401": {
             "description": "You are not permitted!"
           },
           "500": {
-            "description": "General error, system cannot tell you what wrongs",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                }
-              }
-            }
+            "description": "General error, system cannot tell you what wrongs"
           }
         }
       }
@@ -200,7 +160,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/components/parameters/xClientId"
+            "$ref": "#/components/parameters/Host"
+          },
+          {
+            "$ref": "#/components/parameters/RequestId"
           }
         ],
         "requestBody": {
@@ -208,37 +171,16 @@
         },
         "responses": {
           "200": {
-            "description": "UpdateCredential success, with given request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseSuccess"
-                }
-              }
-            }
+            "description": "UpdateCredential success, with given request"
           },
           "400": {
-            "description": "Check request, body not comply with request rules",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                }
-              }
-            }
+            "description": "Check request, body not comply with request rules"
           },
           "401": {
             "description": "You are not permitted!"
           },
           "500": {
-            "description": "General error, system cannot tell you what wrongs",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                }
-              }
-            }
+            "description": "General error, system cannot tell you what wrongs"
           }
         }
       }
@@ -256,7 +198,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/components/parameters/xClientId"
+            "$ref": "#/components/parameters/Host"
+          },
+          {
+            "$ref": "#/components/parameters/RequestId"
           }
         ],
         "requestBody": {
@@ -264,37 +209,16 @@
         },
         "responses": {
           "200": {
-            "description": "DeleteCredential success, with given request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseSuccess"
-                }
-              }
-            }
+            "description": "DeleteCredential success, with given request"
           },
           "400": {
-            "description": "Check request, body not comply with request rules",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                }
-              }
-            }
+            "description": "Check request, body not comply with request rules"
           },
           "401": {
             "description": "You are not permitted!"
           },
           "500": {
-            "description": "General error, system cannot tell you what wrongs",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                }
-              }
-            }
+            "description": "General error, system cannot tell you what wrongs"
           }
         }
       }
@@ -312,101 +236,30 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/RequestCredential"
+              "$ref": "#/components/schemas/Credential"
             }
           }
         }
       }
     },
     "schemas": {
-      "RequestCredential": {
+      "Credential": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "request_id": {
-            "type": "string",
-            "maxLength": 36,
-            "pattern": "[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}"
+          "account_id": {
+            "type": "integer",
+            "format": "uint",
+            "minimum": 1
           },
-          "data": {
-            "type": "object",
-            "properties": {
-              "account_id": {
-                "type": "integer",
-                "format": "uint",
-                "minimum": 1
-              },
-              "email_address": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              }
-            }
-          }
-        }
-      },
-      "ResponseSuccess": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "response_id": {
-            "type": "string",
-            "maxLength": 36,
-            "pattern": "[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}"
+          "email_address": {
+            "type": "string"
           },
-          "request_id": {
-            "type": "string",
-            "maxLength": 36,
-            "pattern": "[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}"
+          "password": {
+            "type": "string"
           },
-          "success": {
-            "type": "boolean"
-          },
-          "response_time": {
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[0-9]$"
-          },
-          "message": {
-            "type": "string",
-            "maxLength": 256,
-            "pattern": "^.$"
-          },
-          "data": {
-            "type": "object",
-            "additionalProperties": true,
-            "maxProperties": 64
-          }
-        }
-      },
-      "ResponseError": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "response_id": {
-            "type": "string",
-            "maxLength": 36,
-            "pattern": "[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}"
-
-          },
-          "request_id": {
-            "type": "string",
-            "maxLength": 36,
-            "pattern": "[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}"
-          },
-          "success": {
-            "type": "boolean"
-          },
-          "response_time": {
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[0-9]$"
-          },
-          "error": {
-            "type": "string",
-            "maxLength": 256,
-            "pattern": "^.$"
+          "salt": {
+            "type": "string"
           }
         }
       }
@@ -418,15 +271,25 @@
       }
     },
     "parameters": {
-      "xClientId": {
-        "name": "X-Client-ID",
+      "Host": {
+        "name": "host",
         "in": "header",
-        "description": "Custom Id that defines you as caller",
+        "description": "Id that defines you as host",
         "required": false,
         "schema": {
           "type": "string",
-          "maxLength": 32,
-          "pattern": "[A-Za-z0-9]{32}"
+          "maxLength": 5
+        }
+      },
+      "RequestId": {
+        "name": "request_id",
+        "in": "header",
+        "description": "Request id that accompanies, what else request",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "maxLength": 36,
+          "pattern": "[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}"
         }
       }
     }
