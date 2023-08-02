@@ -33,7 +33,7 @@ func InitLog() {
 	zerolog.SetGlobalLevel(AppLogLevelDetermination(AppLogLevel))
 
 	currentTime := time.Now()
-	filename := "logs/semeru2-" + currentTime.Format("02Jan2006.log")
+	filename := "logs/" + AppName + "-" + currentTime.Format("02Jan2006.log")
 	file, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
 		panic(err.Error())
